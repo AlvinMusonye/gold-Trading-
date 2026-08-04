@@ -166,7 +166,7 @@ function App() {
               Premium gold bars, smelting, and export at industry scale.
             </h1>
             <p className="mt-4 max-w-xl text-base text-stone-300 sm:mt-6 sm:text-lg">
-              We supply certified gold  from 10 kg to 5 tonne, refine raw gold , and handle  export to global markets.
+            We supply premium certified gold to qualified buyers while providing professional gold smelting and refining services. From 10 kg to 5 tonnes, we ensure verified purity, secure transactions, and reliable global delivery backed by industry expertise.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
               <a
