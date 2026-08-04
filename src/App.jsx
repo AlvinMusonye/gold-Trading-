@@ -163,8 +163,7 @@ function App() {
               Large-scale gold refining & trade
             </p>
             <h1 className="max-w-2xl text-2xl font-semibold leading-tight sm:text-4xl lg:text-6xl">
-              Premium gold bars, smelting, and export at industry scale.
-            </h1>
+We Sell Certified Gold & Provide Professional Smelting Services.            </h1>
             <p className="mt-4 max-w-xl text-base text-stone-300 sm:mt-6 sm:text-lg">
             We supply premium certified gold to qualified buyers while providing professional gold smelting and refining services. From 10 kg to 5 tonnes, we ensure verified purity, secure transactions, and reliable global delivery backed by industry expertise.
             </p>
