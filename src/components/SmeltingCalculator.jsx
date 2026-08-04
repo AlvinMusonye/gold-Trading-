@@ -48,26 +48,26 @@ function SmeltingCalculator() {
   const hasInput = weightNum > 0
 
   return (
-    <section id="smelting" className="space-y-8">
+    <section id="smelting" className="space-y-6 sm:space-y-8">
       <div>
-        <p className="text-sm uppercase tracking-[0.35em] text-amber-400">Smelting Services</p>
-        <h2 className="mt-2 text-3xl font-semibold">Gold Smelting & Refining</h2>
-        <p className="mt-3 max-w-2xl text-stone-300">
+        <p className="text-xs uppercase tracking-[0.35em] text-amber-400 sm:text-sm">Smelting Services</p>
+        <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">Gold Smelting & Refining</h2>
+        <p className="mt-3 max-w-2xl text-sm text-stone-300 sm:text-base">
           Professional smelting services for gold of all purities. Use our calculator below to estimate your smelting costs, then book a session with our metallurgy team.
         </p>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
+      <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] sm:gap-8">
         {/* Calculator form */}
-        <div className="rounded-[1.25rem] border border-amber-500/20 bg-stone-950/80 p-6 shadow-lg">
-          <h3 className="mb-6 text-xl font-semibold text-amber-200">
+        <div className="rounded-[1rem] border border-amber-500/20 bg-stone-950/80 p-5 shadow-lg sm:rounded-[1.25rem] sm:p-6">
+          <h3 className="mb-5 text-lg font-semibold text-amber-200 sm:mb-6 sm:text-xl">
             Smelting Cost Calculator
           </h3>
 
-          <div className="space-y-5">
+          <div className="space-y-4 sm:space-y-5">
             {/* Carat selector */}
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-stone-300">
+              <label className="mb-1.5 block text-xs font-medium text-stone-300 sm:text-sm">
                 Gold Carat
               </label>
               <div className="grid grid-cols-4 gap-2">
@@ -76,14 +76,14 @@ function SmeltingCalculator() {
                     key={option.value}
                     type="button"
                     onClick={() => setCarat(option.value)}
-                    className={`relative rounded-xl border px-3 py-2.5 text-sm font-semibold transition ${
+                    className={`relative rounded-xl border px-2 py-2 text-xs font-semibold transition sm:px-3 sm:py-2.5 sm:text-sm ${
                       carat === option.value
                         ? 'border-amber-400 bg-amber-500/20 text-amber-300'
                         : 'border-stone-700 bg-stone-900/60 text-stone-400 hover:border-stone-500'
                     }`}
                   >
                     {option.label}
-                    <span className="mt-0.5 block text-xs font-normal opacity-70">
+                    <span className="mt-0.5 block text-[10px] font-normal opacity-70 sm:text-xs">
                       {(option.purity * 100).toFixed(1)}%
                     </span>
                   </button>
@@ -93,14 +93,14 @@ function SmeltingCalculator() {
 
             {/* Weight unit + input */}
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-stone-300">
+              <label className="mb-1.5 block text-xs font-medium text-stone-300 sm:text-sm">
                 Weight
               </label>
               <div className="flex gap-2">
                 <select
                   value={weightUnit}
                   onChange={(e) => setWeightUnit(e.target.value)}
-                  className="rounded-xl border border-stone-700 bg-black/60 px-3 py-3 text-sm outline-none transition focus:border-amber-400"
+                  className="rounded-xl border border-stone-700 bg-black/60 px-3 py-2.5 text-xs outline-none transition focus:border-amber-400 sm:py-3 sm:text-sm"
                 >
                   {WEIGHT_UNITS.map((u) => (
                     <option key={u.value} value={u.value}>
@@ -116,21 +116,21 @@ function SmeltingCalculator() {
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
                   placeholder={weightUnit === 'kg' ? 'e.g. 10' : 'e.g. 500'}
-                  className="flex-1 rounded-xl border border-stone-700 bg-black/60 px-4 py-3 text-sm outline-none transition focus:border-amber-400"
+                  className="flex-1 rounded-xl border border-stone-700 bg-black/60 px-4 py-2.5 text-xs outline-none transition focus:border-amber-400 sm:py-3 sm:text-sm"
                 />
               </div>
             </div>
 
             {/* Currency selector */}
             <div>
-              <label htmlFor="currency" className="mb-1.5 block text-sm font-medium text-stone-300">
+              <label htmlFor="currency" className="mb-1.5 block text-xs font-medium text-stone-300 sm:text-sm">
                 Currency
               </label>
               <select
                 id="currency"
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                className="w-full rounded-xl border border-stone-700 bg-black/60 px-4 py-3 text-sm outline-none transition focus:border-amber-400"
+                className="w-full rounded-xl border border-stone-700 bg-black/60 px-4 py-2.5 text-xs outline-none transition focus:border-amber-400 sm:py-3 sm:text-sm"
               >
                 {CURRENCIES.map((c) => (
                   <option key={c.code} value={c.code}>
@@ -142,13 +142,13 @@ function SmeltingCalculator() {
           </div>
 
           {/* Results */}
-          <div className="mt-6 rounded-[1rem] border border-amber-500/20 bg-black/50 p-5">
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-amber-400">
+          <div className="mt-5 rounded-[1rem] border border-amber-500/20 bg-black/50 p-4 sm:mt-6 sm:p-5">
+            <h4 className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-amber-400 sm:text-sm">
               Estimate Breakdown
             </h4>
 
             {hasInput ? (
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-xs sm:text-sm">
                 <div className="flex justify-between">
                   <span className="text-stone-400">Total gold weight</span>
                   <span className="font-medium text-stone-200">
@@ -179,7 +179,7 @@ function SmeltingCalculator() {
                 </div>
               </div>
             ) : (
-              <p className="text-sm text-stone-500">
+              <p className="text-xs text-stone-500 sm:text-sm">
                 Enter a weight to see your estimate.
               </p>
             )}
@@ -187,10 +187,10 @@ function SmeltingCalculator() {
         </div>
 
         {/* Info panel */}
-        <div className="flex flex-col gap-6">
-          <div className="rounded-[1.25rem] border border-stone-800 bg-stone-950/70 p-6">
-            <h3 className="text-lg font-semibold text-amber-200">What we smelt</h3>
-            <ul className="mt-4 space-y-3 text-sm text-stone-300">
+        <div className="flex flex-col gap-4 sm:gap-6">
+          <div className="rounded-[1rem] border border-stone-800 bg-stone-950/70 p-5 sm:rounded-[1.25rem] sm:p-6">
+            <h3 className="text-base font-semibold text-amber-200 sm:text-lg">What we smelt</h3>
+            <ul className="mt-4 space-y-3 text-xs text-stone-300 sm:text-sm">
               <li className="flex items-start gap-3">
                 <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
                 Gold jewellery, scrap, and dental gold
@@ -210,9 +210,9 @@ function SmeltingCalculator() {
             </ul>
           </div>
 
-          <div className="rounded-[1.25rem] border border-stone-800 bg-stone-950/70 p-6">
-            <h3 className="text-lg font-semibold text-amber-200">How it works</h3>
-            <ol className="mt-4 space-y-3 text-sm text-stone-300">
+          <div className="rounded-[1rem] border border-stone-800 bg-stone-950/70 p-5 sm:rounded-[1.25rem] sm:p-6">
+            <h3 className="text-base font-semibold text-amber-200 sm:text-lg">How it works</h3>
+            <ol className="mt-4 space-y-3 text-xs text-stone-300 sm:text-sm">
               <li className="flex items-start gap-3">
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-xs font-semibold text-amber-300">
                   1
@@ -238,7 +238,7 @@ function SmeltingCalculator() {
             href="https://wa.me/+254780396250"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-amber-500 px-5 py-3 text-center text-sm font-semibold text-black transition hover:bg-amber-400"
+            className="rounded-full bg-amber-500 px-5 py-2.5 text-center text-xs font-semibold text-black transition hover:bg-amber-400 sm:px-5 sm:py-3 sm:text-sm"
           >
             Book smelting via WhatsApp
           </a>
