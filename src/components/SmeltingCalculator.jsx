@@ -193,19 +193,7 @@ function SmeltingCalculator() {
             <ul className="mt-4 space-y-3 text-xs text-stone-300 sm:text-sm">
               <li className="flex items-start gap-3">
                 <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
-                Gold jewellery, scrap, and dental gold
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
-                Gold concentrates and doré bars
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
-                Electronic scrap and industrial gold
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
-                Alluvial and placer gold
+                Gold Bars to Refined Gold Bars
               </li>
             </ul>
           </div>
