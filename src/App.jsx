@@ -70,7 +70,7 @@ function App() {
     const body = encodeURIComponent(
       `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nInterest: ${formData.interest}\nQuantity: ${formData.quantity} kg\n\nPlease contact me regarding my gold inquiry.`
     )
-    const mailtoLink = `mailto:hello@aurumlegacy.com?subject=${subject}&body=${body}`
+    const mailtoLink = `mailto:johnrumenya@gmail.com?subject=${subject}&body=${body}`
 
     const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Gold%20Consultation&details=${encodeURIComponent(`Private consultation with Raw Gold Refiners for ${formData.name || 'a new client'}. Quantity: ${formData.quantity} kg.`)}`
 
@@ -256,7 +256,7 @@ function App() {
             <a href="tel:+254780396250" className="rounded-full bg-amber-500 px-6 py-3 font-semibold text-black transition hover:bg-amber-400">
               Call now
             </a>
-            <a href="mailto:hello@aurumlegacy.com" className="rounded-full border border-amber-500/40 px-6 py-3 font-semibold text-amber-200 transition hover:border-amber-300">
+            <a href="mailto:johnrumenya@gmail.com" className="rounded-full border border-amber-500/40 px-6 py-3 font-semibold text-amber-200 transition hover:border-amber-300">
               Email us
             </a>
           </div>
