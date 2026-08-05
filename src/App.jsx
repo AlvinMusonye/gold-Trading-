@@ -71,7 +71,7 @@ function App() {
     const body = encodeURIComponent(
       `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nInterest: ${formData.interest}\nQuantity: ${formData.quantity} kg\n\nPlease contact me regarding my gold inquiry.`
     )
-    const mailtoLink = `mailto:johnrumenya@gmail.com?subject=${subject}&body=${body}`
+    const mailtoLink = `mailto:rawgoldrefiners@gmail.com?subject=${subject}&body=${body}`
 
     const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Gold%20Consultation&details=${encodeURIComponent(`Private consultation with Raw Gold Refiners for ${formData.name || 'a new client'}. Quantity: ${formData.quantity} kg.`)}`
 
@@ -313,7 +313,7 @@ We Sell Certified Gold & Provide Professional Smelting Services.            </h1
             <a href="tel:+254780396250" className="rounded-full bg-amber-500 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-amber-400 sm:px-6 sm:py-3">
               Call now
             </a>
-            <a href="mailto:johnrumenya@gmail.com" className="rounded-full border border-amber-500/40 px-5 py-2.5 text-sm font-semibold text-amber-200 transition hover:border-amber-300 sm:px-6 sm:py-3">
+            <a href="mailto:rawgoldrefiners@gmail.com" className="rounded-full border border-amber-500/40 px-5 py-2.5 text-sm font-semibold text-amber-200 transition hover:border-amber-300 sm:px-6 sm:py-3">
               Email us
             </a>
           </div>
