@@ -17,6 +17,16 @@ const offerings = [
     description: 'Licensed gold export services with full documentation. We handle customs, assaying, and international logistics.',
     badge: 'For global buyers',
   },
+  {
+    title: 'Testing Facility',
+    description: 'In-house assay lab with precision XRF and fire assay testing. We verify purity and weight before every transaction, with certified results issued on the spot.',
+    badge: 'For verified purity',
+  },
+  {
+    title: 'Storage Facility',
+    description: 'Secure, insured vault storage for bullion and bars. Climate-controlled, monitored around the clock, with flexible short and long-term holding options.',
+    badge: 'For secure holding',
+  },
 ]
 
 const steps = [
@@ -311,7 +321,10 @@ We Sell Certified Gold & Provide Professional Smelting Services.            </h1
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:mt-8 sm:flex-row">
             <a href="tel:+254780396250" className="rounded-full bg-amber-500 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-amber-400 sm:px-6 sm:py-3">
-              Call now
+              Call +254 780 396250
+            </a>
+            <a href="tel:+254752634066" className="rounded-full bg-amber-500 px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-amber-400 sm:px-6 sm:py-3">
+              Call +254 752 634066
             </a>
             <a href="mailto:rawgoldrefiners@gmail.com" className="rounded-full border border-amber-500/40 px-5 py-2.5 text-sm font-semibold text-amber-200 transition hover:border-amber-300 sm:px-6 sm:py-3">
               Email us
