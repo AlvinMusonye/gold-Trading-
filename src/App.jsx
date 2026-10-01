@@ -3,19 +3,14 @@ import SmeltingCalculator from './components/SmeltingCalculator'
 
 const offerings = [
   {
-    title: 'Gold Bars & Bullion',
-    description: 'Investment grade gold bars from 10 kg to 5000 kg. 99.9% purity, certified and ready for delivery or secure storage.',
-    badge: 'For investors',
-  },
-  {
     title: 'Smelting & Refining',
     description: 'Industrial scale gold smelting at $100/kg. We refine scrap, doré bars, and alluvial gold into certified pure bullion.',
     badge: 'For miners & traders',
   },
   {
-    title: 'Gold Export & Trade',
-    description: 'Licensed gold export services with full documentation. We handle customs, assaying, and international logistics.',
-    badge: 'For global buyers',
+    title: 'Gold Refining Consultancy',
+    description: 'Strategic advisory for investors, miners, and traders seeking refinery partnerships, process guidance, and compliant gold recovery solutions.',
+    badge: 'For investors',
   },
   {
     title: 'Testing Facility',
@@ -173,9 +168,10 @@ function App() {
               Large-scale gold refining & trade
             </p>
             <h1 className="max-w-2xl text-2xl font-semibold leading-tight sm:text-4xl lg:text-6xl">
-We Sell Certified Gold & Provide Professional Smelting Services.            </h1>
+              Professional Gold Refining & Investor Consultancy.
+            </h1>
             <p className="mt-4 max-w-xl text-base text-stone-300 sm:mt-6 sm:text-lg">
-            We supply premium certified gold to qualified buyers while providing professional gold smelting and refining services. From 10 kg to 5 tonnes, we ensure verified purity, secure transactions, and reliable global delivery backed by industry expertise.
+              We are a refinery and advisory partner for investors, miners, and traders. We specialize in gold refining, smelting, testing, and strategic guidance—without selling raw gold directly.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
               <a
@@ -280,7 +276,7 @@ We Sell Certified Gold & Provide Professional Smelting Services.            </h1
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-xs uppercase tracking-[0.35em] text-amber-400 sm:text-sm">What we offer</p>
-              <h2 className="text-2xl font-semibold sm:text-3xl">Large-scale gold supply, refining, and export</h2>
+              <h2 className="text-2xl font-semibold sm:text-3xl">Gold refining, testing, and investor consultancy</h2>
             </div>
           </div>
           <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
