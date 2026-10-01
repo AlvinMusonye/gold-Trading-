@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { WHATSAPP_URL } from '../content'
+import { ArrowIcon, CheckIcon } from './Icons'
+import Reveal from './Reveal'
 
 const CARAT_OPTIONS = [
   { value: 24, label: '24K', purity: 0.999 },
@@ -8,8 +11,8 @@ const CARAT_OPTIONS = [
 ]
 
 const WEIGHT_UNITS = [
-  { value: 'kg', label: 'Kilograms (kg)' },
-  { value: 'g', label: 'Grams (g)' },
+  { value: 'kg', label: 'kg' },
+  { value: 'g', label: 'g' },
 ]
 
 const CURRENCIES = [
@@ -21,6 +24,17 @@ const CURRENCIES = [
 
 // Smelting rate: $100 USD per kg of raw gold
 const SMELT_RATE_USD_PER_KG = 100
+
+const formatMoney = (amount) =>
+  amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
+const SMELT_TYPES = ['Gold nuggets to gold bars', 'Gold Bars to Refined Gold Bars']
+
+const SMELT_STEPS = [
+  'Deliver your gold to our facility for assaying.',
+  'We melt, refine, and cast to your specification.',
+  'Receive your refined gold with a purity certificate.',
+]
 
 function SmeltingCalculator() {
   const [carat, setCarat] = useState(24)
@@ -43,198 +57,187 @@ function SmeltingCalculator() {
 
   // Smelting cost: $100 USD per kg of raw gold input
   const smeltCostUSD = weightKg * SMELT_RATE_USD_PER_KG
-  const smeltCostConverted = (smeltCostUSD * selectedCurrency.rate).toFixed(2)
+  const smeltCost = formatMoney(smeltCostUSD * selectedCurrency.rate)
 
   const hasInput = weightNum > 0
 
+  const breakdown = [
+    {
+      label: 'Total gold weight',
+      value: weightGrams >= 1000 ? `${weightKg.toFixed(3)} kg` : `${weightGrams.toFixed(1)} g`,
+    },
+    {
+      label: 'Pure gold content',
+      value: pureWeightKg >= 1 ? `${pureWeightKg.toFixed(3)} kg` : `${pureWeightGrams.toFixed(2)} g`,
+    },
+    {
+      label: 'Rate',
+      value: `${selectedCurrency.symbol} ${formatMoney(SMELT_RATE_USD_PER_KG * selectedCurrency.rate)} / kg`,
+    },
+  ]
+
   return (
-    <section id="smelting" className="space-y-6 sm:space-y-8">
-      <div>
-        <p className="text-xs uppercase tracking-[0.35em] text-amber-400 sm:text-sm">Smelting Services</p>
-        <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">Gold Smelting & Refining</h2>
-        <p className="mt-3 max-w-2xl text-sm text-stone-300 sm:text-base">
-          Professional smelting services for gold of all purities. Use our calculator below to estimate your smelting costs, then book a session with our metallurgy team.
-        </p>
+    <section id="smelting" className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+      <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+        <Reveal>
+          <p className="eyebrow">Smelting services</p>
+          <h2 className="mt-6 font-display text-4xl leading-[1.05] text-ink sm:text-5xl lg:text-6xl">
+            Gold Smelting <span className="text-gold-gradient italic">&amp; Refining</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={150}>
+          <p className="max-w-md text-base leading-8 text-ink-soft lg:ml-auto">
+            Professional smelting services for gold of all purities. Use our calculator below to estimate your smelting
+            costs, then book a session with our metallurgy team.
+          </p>
+        </Reveal>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr] sm:gap-8">
-        {/* Calculator form */}
-        <div className="rounded-[1rem] border border-amber-500/20 bg-stone-950/80 p-5 shadow-lg sm:rounded-[1.25rem] sm:p-6">
-          <h3 className="mb-5 text-lg font-semibold text-amber-200 sm:mb-6 sm:text-xl">
-            Smelting Cost Calculator
-          </h3>
-
-          <div className="space-y-4 sm:space-y-5">
-            {/* Carat selector */}
-            <div>
-              <label className="mb-1.5 block text-xs font-medium text-stone-300 sm:text-sm">
-                Gold Carat
-              </label>
-              <div className="grid grid-cols-4 gap-2">
-                {CARAT_OPTIONS.map((option) => (
-                  <button
-                    key={option.value}
-                    type="button"
-                    onClick={() => setCarat(option.value)}
-                    className={`relative rounded-xl border px-2 py-2 text-xs font-semibold transition sm:px-3 sm:py-2.5 sm:text-sm ${
-                      carat === option.value
-                        ? 'border-amber-400 bg-amber-500/20 text-amber-300'
-                        : 'border-stone-700 bg-stone-900/60 text-stone-400 hover:border-stone-500'
-                    }`}
-                  >
-                    {option.label}
-                    <span className="mt-0.5 block text-[10px] font-normal opacity-70 sm:text-xs">
-                      {(option.purity * 100).toFixed(1)}%
-                    </span>
-                  </button>
-                ))}
-              </div>
+      <div className="mt-16 grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
+        {/* Calculator */}
+        <Reveal variant="left" className="h-full">
+          <div className="card-lux h-full p-6 sm:p-10">
+            <div className="flex items-center justify-between gap-4">
+              <h3 className="font-display text-3xl text-ink sm:text-4xl">Smelting Cost Calculator</h3>
+              <span className="hidden shrink-0 rounded-full bg-gold-50 px-3.5 py-1.5 text-xs font-bold text-gold-700 ring-1 ring-gold-200 sm:inline-flex">
+                $100 / kg
+              </span>
             </div>
 
-            {/* Weight unit + input */}
-            <div>
-              <label className="mb-1.5 block text-xs font-medium text-stone-300 sm:text-sm">
-                Weight
-              </label>
-              <div className="flex gap-2">
-                <select
-                  value={weightUnit}
-                  onChange={(e) => setWeightUnit(e.target.value)}
-                  className="rounded-xl border border-stone-700 bg-black/60 px-3 py-2.5 text-xs outline-none transition focus:border-amber-400 sm:py-3 sm:text-sm"
-                >
-                  {WEIGHT_UNITS.map((u) => (
-                    <option key={u.value} value={u.value}>
-                      {u.label}
-                    </option>
+            <div className="mt-10 grid gap-8 md:grid-cols-2">
+              <div className="space-y-7">
+                <div>
+                  <span className="field-label">Gold carat</span>
+                  <div className="grid grid-cols-4 gap-2">
+                    {CARAT_OPTIONS.map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => setCarat(option.value)}
+                        aria-pressed={carat === option.value}
+                        className={`rounded-xl border px-1 py-3 text-sm font-bold transition-all duration-300 ${
+                          carat === option.value
+                            ? 'border-gold-400 bg-gold-50 text-ink shadow-[0_0_0_3px_rgba(201,162,74,0.18)]'
+                            : 'border-sand bg-ivory text-ink-soft hover:border-gold-300'
+                        }`}
+                      >
+                        {option.label}
+                        <span className="mt-0.5 block text-[0.65rem] font-medium text-ink-mute">
+                          {(option.purity * 100).toFixed(1)}%
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="weight" className="field-label">Weight</label>
+                  <div className="flex gap-2">
+                    <input
+                      id="weight"
+                      type="number"
+                      min="0"
+                      step={weightUnit === 'kg' ? '0.001' : '0.1'}
+                      value={weight}
+                      onChange={(e) => setWeight(e.target.value)}
+                      placeholder={weightUnit === 'kg' ? 'e.g. 10' : 'e.g. 500'}
+                      className="field flex-1"
+                    />
+                    <div className="flex rounded-[0.9rem] border border-sand bg-ivory p-1">
+                      {WEIGHT_UNITS.map((u) => (
+                        <button
+                          key={u.value}
+                          type="button"
+                          onClick={() => setWeightUnit(u.value)}
+                          aria-pressed={weightUnit === u.value}
+                          className={`rounded-[0.65rem] px-3.5 text-sm font-semibold transition-all duration-300 ${
+                            weightUnit === u.value ? 'bg-white text-ink shadow-sm' : 'text-ink-mute hover:text-ink'
+                          }`}
+                        >
+                          {u.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="currency" className="field-label">Currency</label>
+                  <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)} className="field">
+                    {CURRENCIES.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.symbol} {c.code}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Results */}
+              <div className="relative flex flex-col overflow-hidden rounded-2xl bg-linear-to-br from-gold-50 via-cream to-gold-100 p-6 ring-1 ring-gold-200/70 sm:p-7">
+                <div aria-hidden="true" className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-white/70 blur-2xl" />
+                <p className="relative text-[0.66rem] font-bold tracking-[0.26em] text-gold-700 uppercase">Estimate breakdown</p>
+                <p className="relative mt-6 text-xs tracking-[0.14em] text-ink-mute uppercase">Total smelting cost</p>
+                <p className="relative mt-1 font-display text-5xl leading-tight tabular-nums">
+                  <span key={`${smeltCost}-${currency}`} className="tick text-gold-deep">
+                    {selectedCurrency.symbol} {hasInput ? smeltCost : '0.00'}
+                  </span>
+                </p>
+
+                <dl className="relative mt-6 space-y-3 border-t border-gold-300/50 pt-5 text-sm">
+                  {breakdown.map((row) => (
+                    <div key={row.label} className="flex justify-between gap-4">
+                      <dt className="text-ink-soft">{row.label}</dt>
+                      <dd className="font-semibold text-ink tabular-nums">{hasInput ? row.value : '—'}</dd>
+                    </div>
                   ))}
-                </select>
-                <input
-                  id="weight"
-                  type="number"
-                  min="0"
-                  step={weightUnit === 'kg' ? '0.001' : '0.1'}
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
-                  placeholder={weightUnit === 'kg' ? 'e.g. 10' : 'e.g. 500'}
-                  className="flex-1 rounded-xl border border-stone-700 bg-black/60 px-4 py-2.5 text-xs outline-none transition focus:border-amber-400 sm:py-3 sm:text-sm"
-                />
+                </dl>
+
+                {!hasInput && (
+                  <p className="relative mt-auto pt-6 text-xs text-ink-mute">Enter a weight to see your estimate.</p>
+                )}
               </div>
             </div>
-
-            {/* Currency selector */}
-            <div>
-              <label htmlFor="currency" className="mb-1.5 block text-xs font-medium text-stone-300 sm:text-sm">
-                Currency
-              </label>
-              <select
-                id="currency"
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value)}
-                className="w-full rounded-xl border border-stone-700 bg-black/60 px-4 py-2.5 text-xs outline-none transition focus:border-amber-400 sm:py-3 sm:text-sm"
-              >
-                {CURRENCIES.map((c) => (
-                  <option key={c.code} value={c.code}>
-                    {c.symbol} {c.code}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
-
-          {/* Results */}
-          <div className="mt-5 rounded-[1rem] border border-amber-500/20 bg-black/50 p-4 sm:mt-6 sm:p-5">
-            <h4 className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-amber-400 sm:text-sm">
-              Estimate Breakdown
-            </h4>
-
-            {hasInput ? (
-              <div className="space-y-2 text-xs sm:text-sm">
-                <div className="flex justify-between">
-                  <span className="text-stone-400">Total gold weight</span>
-                  <span className="font-medium text-stone-200">
-                    {weightGrams >= 1000
-                      ? `${weightKg.toFixed(3)} kg`
-                      : `${weightGrams.toFixed(1)} g`}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-stone-400">Pure gold content</span>
-                  <span className="font-medium text-stone-200">
-                    {pureWeightKg >= 1
-                      ? `${pureWeightKg.toFixed(3)} kg`
-                      : `${pureWeightGrams.toFixed(2)} g`}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-stone-400">Rate</span>
-                  <span className="font-medium text-stone-200">
-                    {selectedCurrency.symbol} {(SMELT_RATE_USD_PER_KG * selectedCurrency.rate).toFixed(2)} / kg
-                  </span>
-                </div>
-                <div className="border-t border-stone-700 pt-2 flex justify-between">
-                  <span className="font-semibold text-stone-100">Total smelting cost</span>
-                  <span className="font-semibold text-amber-300">
-                    {selectedCurrency.symbol} {smeltCostConverted}
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <p className="text-xs text-stone-500 sm:text-sm">
-                Enter a weight to see your estimate.
-              </p>
-            )}
-          </div>
-        </div>
+        </Reveal>
 
         {/* Info panel */}
-        <div className="flex flex-col gap-4 sm:gap-6">
-          <div className="rounded-[1rem] border border-stone-800 bg-stone-950/70 p-5 sm:rounded-[1.25rem] sm:p-6">
-            <h3 className="text-base font-semibold text-amber-200 sm:text-lg">What we smelt</h3>
-            <ul className="mt-4 space-y-3 text-xs text-stone-300 sm:text-sm">
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
-                Gold nuggets to gold bars
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-400" />
-                Gold Bars to Refined Gold Bars
-              </li>
-            </ul>
-          </div>
+        <Reveal variant="right" delay={120} className="h-full">
+          <div className="flex h-full flex-col gap-5">
+            <div className="card-lux p-7 sm:p-8">
+              <h3 className="font-display text-2xl text-ink">What we smelt</h3>
+              <ul className="mt-5 space-y-3.5 text-sm text-ink-soft">
+                {SMELT_TYPES.map((type) => (
+                  <li key={type} className="flex items-start gap-3">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold-50 text-gold-600 ring-1 ring-gold-200">
+                      <CheckIcon className="h-3.5 w-3.5" />
+                    </span>
+                    {type}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="rounded-[1rem] border border-stone-800 bg-stone-950/70 p-5 sm:rounded-[1.25rem] sm:p-6">
-            <h3 className="text-base font-semibold text-amber-200 sm:text-lg">How it works</h3>
-            <ol className="mt-4 space-y-3 text-xs text-stone-300 sm:text-sm">
-              <li className="flex items-start gap-3">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-xs font-semibold text-amber-300">
-                  1
-                </span>
-                Deliver your gold to our facility for assaying.
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-xs font-semibold text-amber-300">
-                  2
-                </span>
-                We melt, refine, and cast to your specification.
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-xs font-semibold text-amber-300">
-                  3
-                </span>
-                Receive your refined gold with a purity certificate.
-              </li>
-            </ol>
-          </div>
+            <div className="card-lux flex-1 p-7 sm:p-8">
+              <h3 className="font-display text-2xl text-ink">How it works</h3>
+              <ol className="mt-5 space-y-4 text-sm text-ink-soft">
+                {SMELT_STEPS.map((step, i) => (
+                  <li key={step} className="flex items-start gap-3">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-gold-300 font-display text-sm text-gold-700">
+                      {i + 1}
+                    </span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
+            </div>
 
-          <a
-            href="https://wa.me/+254780396250"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-amber-500 px-5 py-2.5 text-center text-xs font-semibold text-black transition hover:bg-amber-400 sm:px-5 sm:py-3 sm:text-sm"
-          >
-            Book smelting via WhatsApp
-          </a>
-        </div>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-gold w-full">
+              Book smelting via WhatsApp
+              <ArrowIcon className="h-4 w-4" />
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
